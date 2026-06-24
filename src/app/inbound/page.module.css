@@ -1,0 +1,380 @@
+.page {
+  height: calc(100vh - 68px - 56px);
+  overflow: hidden;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  height: 100%;
+}
+
+.leftPanel {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rightPanel {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panelTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countBadge {
+  background: #DC2626;
+  color: white;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.poCard {
+  padding: 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.poCard:hover {
+  border-color: var(--primary-green);
+  background: rgba(30, 113, 50, 0.03);
+}
+
+.poCardActive {
+  border-color: var(--primary-green);
+  background: rgba(30, 113, 50, 0.06);
+}
+
+.poId {
+  font-weight: 700;
+  font-size: 14px;
+  font-family: monospace;
+  color: var(--text-dark);
+}
+
+.poSupplier {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.poItems {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.totalNilai {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--primary-green);
+  margin-top: 8px;
+}
+
+.arrowHint {
+  font-size: 11px;
+  color: var(--primary-green);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.recentSection {
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.poCardDone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--success-bg);
+  border-radius: 10px;
+}
+
+.doneCheck {
+  width: 28px;
+  height: 28px;
+  background: var(--primary-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* QC Detail */
+.qcHeader {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.qcTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.qcSupplier {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.itemsQC {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.qcItem {
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+
+.qcItemAccepted {
+  border-color: var(--primary-green);
+  background: rgba(30, 113, 50, 0.04);
+}
+
+.qcItemRejected {
+  border-color: #DC2626;
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.qcItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.qcItemName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.qcItemMeta {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.qcDecision {
+  display: flex;
+  gap: 8px;
+}
+
+.btnDecide {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: all 0.15s;
+}
+
+.btnAccept {
+  background: var(--primary-green);
+  color: white;
+  border-color: var(--primary-green);
+}
+
+.btnAcceptOutline {
+  background: white;
+  color: var(--primary-green);
+  border-color: var(--primary-green);
+}
+
+.btnAcceptOutline:hover { background: rgba(30, 113, 50, 0.07); }
+
+.btnReject {
+  background: #DC2626;
+  color: white;
+  border-color: #DC2626;
+}
+
+.btnRejectOutline {
+  background: white;
+  color: #DC2626;
+  border-color: #DC2626;
+}
+
+.btnRejectOutline:hover { background: rgba(220, 38, 38, 0.07); }
+
+.checkList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary-green);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.qtyEdit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(30, 113, 50, 0.06);
+  border-radius: 8px;
+}
+
+.qtyLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+.qtyInput {
+  width: 80px;
+  padding: 6px 10px;
+  border: 1.5px solid var(--primary-green);
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+  font-weight: 700;
+}
+
+.qtyUnit {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.alasanSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(220, 38, 38, 0.04);
+  border-radius: 8px;
+}
+
+.alasanLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: #DC2626;
+}
+
+.alasanSelect {
+  padding: 8px 12px;
+  border: 1.5px solid #DC2626;
+  border-radius: 8px;
+  font-size: 13px;
+  background: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.wasteWarning {
+  font-size: 12px;
+  color: #DC2626;
+  background: var(--alert-bg);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.btnConfirm {
+  background: var(--primary-green);
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.btnConfirm:hover:not(:disabled) {
+  background: var(--secondary-green);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(30, 113, 50, 0.25);
+}
+
+.btnConfirmDisabled {
+  background: #E5E7EB;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Empty & Success states */
+.emptyState, .successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  gap: 12px;
+  color: var(--text-muted);
+  padding: 40px;
+}
+
+.emptyIcon, .successIcon {
+  font-size: 48px;
+}
+
+.emptyState h3, .successState h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.successState {
+  color: var(--primary-green);
+}
+
+.successState h3 {
+  color: var(--primary-green);
+}

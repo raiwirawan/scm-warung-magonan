@@ -1,0 +1,392 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: calc(100vh - 68px - 56px);
+  overflow: hidden;
+}
+
+.summaryBar {
+  display: flex;
+  align-items: center;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 16px 24px;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.summaryItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summaryValue {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.summaryValueAlert {
+  font-size: 20px;
+  font-weight: 800;
+  color: #DC2626;
+}
+
+.summaryDivider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-color);
+  margin: 0 24px;
+  flex-shrink: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.leftPanel {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.filterBar {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 9px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+  background: #FAFAFA;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-green);
+  background: white;
+}
+
+.selectFilter {
+  padding: 9px 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
+  background: #FAFAFA;
+  cursor: pointer;
+  outline: none;
+}
+
+.selectFilter:focus {
+  border-color: var(--primary-green);
+}
+
+.tableWrap {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  background: #F9FAFB;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.row:hover {
+  background: #F9FAFB;
+}
+
+.rowSelected {
+  background: rgba(30, 113, 50, 0.06);
+  cursor: pointer;
+}
+
+.bahanName {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.katTag {
+  background: #EEF2FF;
+  color: #3730A3;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.qtyCell {
+  color: var(--text-dark);
+  font-size: 14px;
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.batchCount {
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.statusAman { background: var(--success-bg); color: var(--success-text); }
+.statusMenipis { background: var(--warning-bg); color: var(--warning-text); }
+.statusHabis { background: var(--alert-bg); color: var(--alert-text); }
+
+/* Right: Batch Detail */
+.rightPanel {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.emptyDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+.detailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detailName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.detailMeta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.detailTotal {
+  text-align: right;
+}
+
+.detailQty {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary-green);
+}
+
+.detailNilai {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.batchSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.batchTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.batchNote {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: -8px;
+}
+
+.batchList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emptyBatch {
+  text-align: center;
+  color: var(--alert-text);
+  font-size: 14px;
+  padding: 20px;
+  background: var(--alert-bg);
+  border-radius: 10px;
+}
+
+.batchItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  position: relative;
+  transition: border-color 0.15s;
+}
+
+.batchItemFirst {
+  border-color: var(--primary-green);
+  background: rgba(30, 113, 50, 0.04);
+}
+
+.batchOrder {
+  width: 26px;
+  height: 26px;
+  background: #F3F4F6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.batchItemFirst .batchOrder {
+  background: var(--primary-green);
+  color: white;
+}
+
+.batchInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.batchId {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.batchPO {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.batchRight {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.batchQty {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-dark);
+}
+
+.batchPrice {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.batchNilai {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-top: 2px;
+}
+
+.nextLabel {
+  position: absolute;
+  top: -1px;
+  right: 10px;
+  background: var(--primary-green);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 0 0 6px 6px;
+  letter-spacing: 0.05em;
+}
+
+.fifoNote {
+  padding: 12px;
+  background: #EFF6FF;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #1E40AF;
+  line-height: 1.5;
+  border: 1px solid #BFDBFE;
+}

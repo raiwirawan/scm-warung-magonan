@@ -1,0 +1,491 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.filterTabs {
+  display: flex;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.filterTab {
+  padding: 7px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+}
+
+.filterTab:hover {
+  background: #F3F4F6;
+  color: var(--text-dark);
+}
+
+.filterTabActive {
+  background: var(--primary-green);
+  color: white;
+}
+
+.filterTabActive:hover {
+  background: var(--secondary-green);
+  color: white;
+}
+
+.filterCount {
+  background: rgba(255,255,255,0.3);
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.filterTabActive .filterCount {
+  background: rgba(255,255,255,0.35);
+}
+
+.filterTab:not(.filterTabActive) .filterCount {
+  background: var(--border-color);
+  color: var(--text-muted);
+}
+
+.btnPrimary {
+  background: var(--primary-green);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.15s;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  background: var(--secondary-green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 113, 50, 0.25);
+}
+
+.btnSecondary {
+  background: white;
+  color: var(--text-dark);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+}
+
+/* PO Cards */
+.poList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.poCard {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.poCard:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.poHeader {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 20px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.poHeader:hover {
+  background: #FAFAFA;
+}
+
+.poLeft {
+  flex: 0 0 180px;
+}
+
+.poId {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-dark);
+  font-family: monospace;
+}
+
+.poSupplier {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.poMid {
+  flex: 1;
+}
+
+.poDate {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.poItemCount {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.poRight {
+  text-align: right;
+}
+
+.poTotal {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.statusBadge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statusDraft { background: #F3F4F6; color: var(--text-muted); }
+.statusDikirim { background: var(--warning-bg); color: var(--warning-text); }
+.statusDiterima { background: var(--success-bg); color: var(--success-text); }
+
+.poChevron {
+  color: var(--text-muted);
+  font-size: 12px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.poDetail {
+  border-top: 1px solid var(--border-color);
+  padding: 20px;
+  background: #FAFAFA;
+}
+
+.itemTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.itemTable th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  background: white;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.itemTable td {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.itemTable tfoot td {
+  padding: 12px 16px;
+  border-top: 2px solid var(--border-color);
+  border-bottom: none;
+}
+
+.bold {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.totalLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.totalValue {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary-green);
+}
+
+.poNotes {
+  padding: 10px 12px;
+  background: white;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.poActions {
+  display: flex;
+  gap: 12px;
+}
+
+.btnAction {
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-dark);
+}
+
+.btnAction:hover {
+  background: #F3F4F6;
+}
+
+.btnActionGreen {
+  padding: 10px 20px;
+  background: var(--primary-green);
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: white;
+}
+
+.btnActionGreen:hover {
+  background: var(--secondary-green);
+}
+
+/* Modal & Form */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.closeBtn {
+  font-size: 18px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  background: none;
+  border: none;
+}
+
+.closeBtn:hover {
+  background: #F3F4F6;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.select {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #FAFAFA;
+  cursor: pointer;
+}
+
+.select:focus { border-color: var(--primary-green); background: white; }
+
+.textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #FAFAFA;
+  resize: vertical;
+}
+
+.textarea:focus { border-color: var(--primary-green); background: white; }
+
+.itemsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: #F9FAFB;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.itemsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnAddItem {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-green);
+  background: rgba(30, 113, 50, 0.08);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btnAddItem:hover {
+  background: rgba(30, 113, 50, 0.15);
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selectSm {
+  flex: 2;
+  padding: 8px 10px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 13px;
+  background: white;
+  outline: none;
+}
+
+.selectSm:focus { border-color: var(--primary-green); }
+
+.inputSm {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 13px;
+  background: white;
+  outline: none;
+  min-width: 0;
+}
+
+.inputSm:focus { border-color: var(--primary-green); }
+
+.satuanLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 32px;
+  text-align: center;
+}
+
+.btnRemove {
+  font-size: 14px;
+  color: var(--alert-text);
+  background: var(--alert-bg);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.totalPO {
+  text-align: right;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.totalPO strong {
+  color: var(--primary-green);
+  font-size: 16px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
