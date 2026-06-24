@@ -17,6 +17,11 @@ export default function PesananPage() {
   // Filter out recent orders for the UI
   const recentOrders = pesanan.slice(0, 3);
 
+  const getStokBahan = (bahanId) => {
+    if (!stok || !stok[bahanId] || !stok[bahanId].batches) return 0;
+    return stok[bahanId].batches.reduce((sum, batch) => sum + batch.qtySisa, 0);
+  };
+
   const addToCart = (menu) => {
     setCart((prev) => {
       const exist = prev.find((item) => item.menuId === menu.id);
@@ -116,6 +121,24 @@ export default function PesananPage() {
                 <div className={styles.menuInfo}>
                   <div className={styles.menuName}>{menu.nama}</div>
                   <div className={styles.menuPrice}>{fmtRp(menu.hargaJual)}</div>
+                </div>
+                
+                {/* Ingredients List */}
+                <div className={styles.menuIngredients}>
+                  <div className={styles.ingredientsTitle}>Bahan Baku & Stok:</div>
+                  {menu.resep.map((bahan) => {
+                    const availStock = getStokBahan(bahan.bahanId);
+                    const isShort = availStock < bahan.qty;
+                    return (
+                      <div key={bahan.bahanId} className={`${styles.ingredientItem} ${isShort ? styles.shortStock : ""}`}>
+                        <span className={styles.ingName}>{bahan.nama}</span>
+                        <span className={styles.ingQty}>
+                          {bahan.qty} {bahan.satuan}
+                          <span className={styles.ingAvail}> (Stok: {availStock.toFixed(1)})</span>
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}
