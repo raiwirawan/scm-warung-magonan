@@ -5,41 +5,37 @@ export async function GET() {
   try {
     const db = initDb();
 
-    const bahanBaku = db.prepare('SELECT * FROM bahan_baku').all();
-    const suppliers = db.prepare('SELECT * FROM suppliers').all().map(s => ({
-      ...s,
-      komoditas: JSON.parse(s.komoditas)
-    }));
-    const menu = db.prepare('SELECT * FROM menu').all().map(m => ({
-      ...m,
-      resep: JSON.parse(m.resep)
-    }));
+    const bahanBaku = db.bahan_baku;
+    const suppliers = db.suppliers;
+    const menu = db.menu;
 
-    const priceHistoryRows = db.prepare('SELECT * FROM price_history').all();
+    // Group price history by bahanId
     const priceHistory = {};
-    priceHistoryRows.forEach(row => {
-      if (!priceHistory[row.bahanId]) priceHistory[row.bahanId] = [];
-      priceHistory[row.bahanId].push({ poId: row.poId, tanggal: row.tanggal, harga: row.harga });
+    db.price_history.forEach(row => {
+      if (!priceHistory[row.bahanId]) {
+        priceHistory[row.bahanId] = [];
+      }
+      priceHistory[row.bahanId].push({
+        poId: row.poId,
+        tanggal: row.tanggal,
+        harga: row.harga
+      });
     });
 
-    const poRows = db.prepare('SELECT * FROM purchase_orders').all();
-    const purchaseOrders = poRows.map(po => ({
-      ...po,
-      items: JSON.parse(po.items)
-    }));
+    const purchaseOrders = db.purchase_orders;
+    const pesanan = db.pesanan;
+    const wasteLog = db.waste_log;
 
-    const pesananRows = db.prepare('SELECT * FROM pesanan').all();
-    const pesanan = pesananRows.map(p => ({
-      ...p,
-      items: JSON.parse(p.items)
-    }));
-
-    const wasteLog = db.prepare('SELECT * FROM waste_log').all();
-
-    const batches = db.prepare('SELECT * FROM inventaris_batch WHERE qtySisa > 0 ORDER BY tanggalMasuk ASC').all();
+    // Group active stock batches by bahanId, sorted by entry date (FIFO)
     const stok = {};
-    batches.forEach(b => {
-      if (!stok[b.bahanId]) stok[b.bahanId] = { batches: [] };
+    const activeBatches = db.inventaris_batch
+      .filter(b => b.qtySisa > 0)
+      .sort((a, b) => a.tanggalMasuk.localeCompare(b.tanggalMasuk));
+
+    activeBatches.forEach(b => {
+      if (!stok[b.bahanId]) {
+        stok[b.bahanId] = { batches: [] };
+      }
       stok[b.bahanId].batches.push(b);
     });
 

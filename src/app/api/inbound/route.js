@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDb } from '@/lib/db';
+import { getDb, saveDb } from '@/lib/db';
 
 export async function POST(request) {
   try {
@@ -12,31 +12,53 @@ export async function POST(request) {
 
     const tanggal = new Date().toISOString().slice(0, 10);
 
-    // Use transaction to ensure all operations succeed or fail together
-    const processInbound = db.transaction(() => {
-      // 1. Update PO status
-      db.prepare('UPDATE purchase_orders SET status = ? WHERE id = ?').run('diterima', data.poId);
+    // 1. Update PO status
+    const poIndex = db.purchase_orders.findIndex(po => po.id === data.poId);
+    if (poIndex !== -1) {
+      db.purchase_orders[poIndex].status = 'diterima';
+    }
 
-      // 2. Insert Approved into inventaris_batch
-      const insertBatch = db.prepare('INSERT INTO inventaris_batch (batchId, bahanId, poId, tanggalMasuk, qtyAwal, qtySisa, hargaBeli) VALUES (?, ?, ?, ?, ?, ?, ?)');
-      const insertPriceHistory = db.prepare('INSERT INTO price_history (bahanId, poId, tanggal, harga) VALUES (?, ?, ?, ?)');
+    // 2. Insert Approved into inventaris_batch and price_history
+    data.approved.forEach((item, index) => {
+      const batchId = `${data.poId}-${item.bahanId}-${Date.now().toString().slice(-4)}-${index}`;
       
-      data.approved.forEach(item => {
-        const batchId = `${data.poId}-${item.bahanId}-${Date.now().toString().slice(-4)}`;
-        insertBatch.run(batchId, item.bahanId, data.poId, tanggal, item.qty, item.qty, item.hargaPerUnit);
-        insertPriceHistory.run(item.bahanId, data.poId, tanggal, item.hargaPerUnit);
+      db.inventaris_batch.push({
+        batchId,
+        bahanId: item.bahanId,
+        poId: data.poId,
+        tanggalMasuk: tanggal,
+        qtyAwal: item.qty,
+        qtySisa: item.qty,
+        hargaBeli: item.hargaPerUnit
       });
 
-      // 3. Insert Rejected into waste_log
-      const insertWaste = db.prepare('INSERT INTO waste_log (id, tanggal, poId, bahanId, namaBahan, qty, satuan, alasanTolak, nilaiKerugian) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-      data.rejected.forEach(item => {
-        const wId = `WST-${Date.now().toString().slice(-6)}-${item.bahanId}`;
-        const kerugian = item.qty * item.hargaPerUnit;
-        insertWaste.run(wId, tanggal, data.poId, item.bahanId, item.nama, item.qty, item.satuan, item.alasanTolak, kerugian);
+      db.price_history.push({
+        bahanId: item.bahanId,
+        poId: data.poId,
+        tanggal,
+        harga: item.hargaPerUnit
       });
     });
 
-    processInbound();
+    // 3. Insert Rejected into waste_log
+    data.rejected.forEach((item, index) => {
+      const wId = `WST-${Date.now().toString().slice(-6)}-${item.bahanId}-${index}`;
+      const kerugian = item.qty * item.hargaPerUnit;
+      
+      db.waste_log.push({
+        id: wId,
+        tanggal,
+        poId: data.poId,
+        bahanId: item.bahanId,
+        namaBahan: item.nama,
+        qty: item.qty,
+        satuan: item.satuan,
+        alasanTolak: item.alasanTolak,
+        nilaiKerugian: kerugian
+      });
+    });
+
+    saveDb(db);
 
     return NextResponse.json({ success: true, message: 'Inbound processed' });
   } catch (error) {

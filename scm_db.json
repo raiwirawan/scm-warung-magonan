@@ -1,0 +1,469 @@
+{
+  "bahan_baku": [
+    {
+      "id": "B001",
+      "nama": "Ayam Kampung",
+      "kategori": "Unggas",
+      "satuan": "Ekor",
+      "minStok": 10
+    },
+    {
+      "id": "B002",
+      "nama": "Beras Ciherang",
+      "kategori": "Sembako",
+      "satuan": "Kg",
+      "minStok": 20
+    },
+    {
+      "id": "B003",
+      "nama": "Cabai Rawit Merah",
+      "kategori": "Bumbu",
+      "satuan": "Kg",
+      "minStok": 2
+    },
+    {
+      "id": "B004",
+      "nama": "Ikan Gurame",
+      "kategori": "Ikan",
+      "satuan": "Kg",
+      "minStok": 5
+    },
+    {
+      "id": "B005",
+      "nama": "Udang Vaname",
+      "kategori": "Seafood",
+      "satuan": "Kg",
+      "minStok": 3
+    },
+    {
+      "id": "B006",
+      "nama": "Santan Segar",
+      "kategori": "Bumbu",
+      "satuan": "Liter",
+      "minStok": 5
+    },
+    {
+      "id": "B007",
+      "nama": "Sayur Bayam",
+      "kategori": "Sayuran",
+      "satuan": "Kg",
+      "minStok": 3
+    },
+    {
+      "id": "B008",
+      "nama": "Tempe",
+      "kategori": "Protein Nabati",
+      "satuan": "Papan",
+      "minStok": 10
+    },
+    {
+      "id": "B009",
+      "nama": "Daging Sapi",
+      "kategori": "Daging",
+      "satuan": "Kg",
+      "minStok": 3
+    },
+    {
+      "id": "B010",
+      "nama": "Kelapa Parut",
+      "kategori": "Bumbu",
+      "satuan": "Btr",
+      "minStok": 10
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "S001",
+      "nama": "Pak Budi Sayur",
+      "kontak": "081234567890",
+      "komoditas": [
+        "Sayuran",
+        "Bumbu"
+      ],
+      "alamat": "Pasar Badung Lt. 2",
+      "rating": 4.8,
+      "totalOrder": 24
+    },
+    {
+      "id": "S002",
+      "nama": "Bu Sari Daging",
+      "kontak": "082345678901",
+      "komoditas": [
+        "Daging",
+        "Unggas"
+      ],
+      "alamat": "Pasar Kreneng Blok C",
+      "rating": 4.5,
+      "totalOrder": 18
+    },
+    {
+      "id": "S003",
+      "nama": "UD Jaya Ikan",
+      "kontak": "083456789012",
+      "komoditas": [
+        "Ikan",
+        "Seafood"
+      ],
+      "alamat": "TPI Kedonganan",
+      "rating": 4.7,
+      "totalOrder": 31
+    },
+    {
+      "id": "S004",
+      "nama": "CV Beras Nusantara",
+      "kontak": "084567890123",
+      "komoditas": [
+        "Beras",
+        "Sembako"
+      ],
+      "alamat": "Distributor Denpasar",
+      "rating": 4.9,
+      "totalOrder": 12
+    }
+  ],
+  "menu": [
+    {
+      "id": "M001",
+      "nama": "Udang Saus Mentega",
+      "kategori": "Seafood",
+      "hargaJual": 65000,
+      "emoji": "🦐",
+      "resep": [
+        {
+          "bahanId": "B005",
+          "nama": "Udang Vaname",
+          "qty": 0.25,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B002",
+          "nama": "Beras Ciherang",
+          "qty": 0.2,
+          "satuan": "Kg"
+        }
+      ]
+    },
+    {
+      "id": "M002",
+      "nama": "Ayam Goreng Magonan",
+      "kategori": "Unggas",
+      "hargaJual": 45000,
+      "emoji": "🍗",
+      "resep": [
+        {
+          "bahanId": "B001",
+          "nama": "Ayam Kampung",
+          "qty": 0.5,
+          "satuan": "Ekor"
+        },
+        {
+          "bahanId": "B002",
+          "nama": "Beras Ciherang",
+          "qty": 0.2,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B003",
+          "nama": "Cabai Rawit Merah",
+          "qty": 0.05,
+          "satuan": "Kg"
+        }
+      ]
+    },
+    {
+      "id": "M003",
+      "nama": "Ikan Gurame Bakar",
+      "kategori": "Ikan",
+      "hargaJual": 75000,
+      "emoji": "🐟",
+      "resep": [
+        {
+          "bahanId": "B004",
+          "nama": "Ikan Gurame",
+          "qty": 0.5,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B002",
+          "nama": "Beras Ciherang",
+          "qty": 0.2,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B003",
+          "nama": "Cabai Rawit Merah",
+          "qty": 0.03,
+          "satuan": "Kg"
+        }
+      ]
+    },
+    {
+      "id": "M004",
+      "nama": "Nasi Goreng Kampung",
+      "kategori": "Nasi",
+      "hargaJual": 30000,
+      "emoji": "🍳",
+      "resep": [
+        {
+          "bahanId": "B002",
+          "nama": "Beras Ciherang",
+          "qty": 0.25,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B003",
+          "nama": "Cabai Rawit Merah",
+          "qty": 0.02,
+          "satuan": "Kg"
+        }
+      ]
+    },
+    {
+      "id": "M005",
+      "nama": "Sayur Bayam Santan",
+      "kategori": "Sayuran",
+      "hargaJual": 20000,
+      "emoji": "🥬",
+      "resep": [
+        {
+          "bahanId": "B007",
+          "nama": "Sayur Bayam",
+          "qty": 0.2,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B006",
+          "nama": "Santan Segar",
+          "qty": 0.2,
+          "satuan": "Liter"
+        }
+      ]
+    },
+    {
+      "id": "M006",
+      "nama": "Tempe Goreng Crispy",
+      "kategori": "Nabati",
+      "hargaJual": 15000,
+      "emoji": "🟫",
+      "resep": [
+        {
+          "bahanId": "B008",
+          "nama": "Tempe",
+          "qty": 1,
+          "satuan": "Papan"
+        },
+        {
+          "bahanId": "B003",
+          "nama": "Cabai Rawit Merah",
+          "qty": 0.01,
+          "satuan": "Kg"
+        }
+      ]
+    },
+    {
+      "id": "M007",
+      "nama": "Sate Languan",
+      "kategori": "Daging",
+      "hargaJual": 55000,
+      "emoji": "🍢",
+      "resep": [
+        {
+          "bahanId": "B009",
+          "nama": "Daging Sapi",
+          "qty": 0.2,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B010",
+          "nama": "Kelapa Parut",
+          "qty": 1,
+          "satuan": "Btr"
+        },
+        {
+          "bahanId": "B002",
+          "nama": "Beras Ciherang",
+          "qty": 0.2,
+          "satuan": "Kg"
+        }
+      ]
+    },
+    {
+      "id": "M008",
+      "nama": "Mujair Nyat-Nyat",
+      "kategori": "Ikan",
+      "hargaJual": 60000,
+      "emoji": "🐡",
+      "resep": [
+        {
+          "bahanId": "B004",
+          "nama": "Ikan Gurame",
+          "qty": 0.4,
+          "satuan": "Kg"
+        },
+        {
+          "bahanId": "B006",
+          "nama": "Santan Segar",
+          "qty": 0.15,
+          "satuan": "Liter"
+        },
+        {
+          "bahanId": "B003",
+          "nama": "Cabai Rawit Merah",
+          "qty": 0.04,
+          "satuan": "Kg"
+        }
+      ]
+    }
+  ],
+  "price_history": [
+    {
+      "bahanId": "B003",
+      "poId": "PO-2024-hist-1",
+      "tanggal": "2024-04-15",
+      "harga": 38000
+    },
+    {
+      "bahanId": "B003",
+      "poId": "PO-2024-hist-2",
+      "tanggal": "2024-05-01",
+      "harga": 40000
+    },
+    {
+      "bahanId": "B003",
+      "poId": "PO-2024-hist-3",
+      "tanggal": "2024-05-20",
+      "harga": 39000
+    },
+    {
+      "bahanId": "B003",
+      "poId": "PO-2024-001",
+      "tanggal": "2024-06-10",
+      "harga": 42000
+    },
+    {
+      "bahanId": "B003",
+      "poId": "PO-2024-004",
+      "tanggal": "2024-06-17",
+      "harga": 48000
+    },
+    {
+      "bahanId": "B001",
+      "poId": "hist-1",
+      "tanggal": "2024-04-15",
+      "harga": 68000
+    },
+    {
+      "bahanId": "B001",
+      "poId": "hist-2",
+      "tanggal": "2024-05-01",
+      "harga": 70000
+    },
+    {
+      "bahanId": "B001",
+      "poId": "hist-3",
+      "tanggal": "2024-05-20",
+      "harga": 72000
+    },
+    {
+      "bahanId": "B001",
+      "poId": "PO-2024-002",
+      "tanggal": "2024-06-12",
+      "harga": 75000
+    }
+  ],
+  "inventaris_batch": [
+    {
+      "batchId": "INIT-B001",
+      "bahanId": "B001",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 68000
+    },
+    {
+      "batchId": "INIT-B002",
+      "bahanId": "B002",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B003",
+      "bahanId": "B003",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 5,
+      "qtySisa": 5,
+      "hargaBeli": 38000
+    },
+    {
+      "batchId": "INIT-B004",
+      "bahanId": "B004",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B005",
+      "bahanId": "B005",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B006",
+      "bahanId": "B006",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 5,
+      "qtySisa": 5,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B007",
+      "bahanId": "B007",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B008",
+      "bahanId": "B008",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B009",
+      "bahanId": "B009",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 20,
+      "qtySisa": 20,
+      "hargaBeli": 10000
+    },
+    {
+      "batchId": "INIT-B010",
+      "bahanId": "B010",
+      "poId": "INIT",
+      "tanggalMasuk": "2024-06-01",
+      "qtyAwal": 5,
+      "qtySisa": 5,
+      "hargaBeli": 10000
+    }
+  ],
+  "purchase_orders": [],
+  "pesanan": [],
+  "waste_log": []
+}

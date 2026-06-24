@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDb } from '@/lib/db';
+import { getDb, saveDb } from '@/lib/db';
 
 export async function POST(request) {
   try {
@@ -13,45 +13,58 @@ export async function POST(request) {
     let totalHarga = 0;
     let totalHPP = 0;
 
-    const processOrder = db.transaction(() => {
-      // For each item in cart
-      for (const cartItem of data.cartItems) {
-        totalHarga += cartItem.hargaJual * cartItem.qty;
+    // Clone inventaris_batch so we can revert if any item fails (mimics SQLite transaction)
+    const tempBatches = JSON.parse(JSON.stringify(db.inventaris_batch));
 
-        // Deduct materials from inventaris_batch
-        for (const bahan of cartItem.resep) {
-          let qtyNeeded = bahan.qty * cartItem.qty;
-          let costForThisBahan = 0;
+    // For each item in cart
+    for (const cartItem of data.cartItems) {
+      totalHarga += cartItem.hargaJual * cartItem.qty;
 
-          // Get batches for this bahan ordered by tanggalMasuk
-          const batches = db.prepare('SELECT * FROM inventaris_batch WHERE bahanId = ? AND qtySisa > 0 ORDER BY tanggalMasuk ASC').all(bahan.bahanId);
-          
-          for (const batch of batches) {
-            if (qtyNeeded <= 0) break;
+      // Deduct materials from inventaris_batch
+      for (const bahan of cartItem.resep) {
+        let qtyNeeded = bahan.qty * cartItem.qty;
+        let costForThisBahan = 0;
 
-            const take = Math.min(batch.qtySisa, qtyNeeded);
-            qtyNeeded -= take;
-            costForThisBahan += take * batch.hargaBeli;
+        // Get batches for this bahan ordered by tanggalMasuk
+        const batches = tempBatches
+          .filter(b => b.bahanId === bahan.bahanId && b.qtySisa > 0)
+          .sort((a, b) => a.tanggalMasuk.localeCompare(b.tanggalMasuk));
+        
+        for (const batch of batches) {
+          if (qtyNeeded <= 0) break;
 
-            // Update batch qtySisa
-            db.prepare('UPDATE inventaris_batch SET qtySisa = qtySisa - ? WHERE batchId = ?').run(take, batch.batchId);
-          }
+          const take = Math.min(batch.qtySisa, qtyNeeded);
+          qtyNeeded -= take;
+          costForThisBahan += take * batch.hargaBeli;
 
-          if (qtyNeeded > 0.001) {
-            // Insufficient stock theoretically, but we'll allow negative or just throw error.
-            // Throwing error rolls back transaction
-            throw new Error(`Stok tidak mencukupi untuk bahan ID ${bahan.bahanId}`);
-          }
-          totalHPP += costForThisBahan;
+          // Update batch qtySisa
+          batch.qtySisa = parseFloat((batch.qtySisa - take).toFixed(4));
         }
-      }
 
-      // Insert Pesanan record
-      const stmt = db.prepare('INSERT INTO pesanan (id, tanggal, waktu, tipe, meja, totalHarga, totalHPP, status, items) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-      stmt.run(orderId, tanggal, waktu, data.tipe || 'Dine-in', data.meja || '-', totalHarga, totalHPP, 'selesai', JSON.stringify(data.cartItems));
+        if (qtyNeeded > 0.001) {
+          return NextResponse.json({ error: `Stok tidak mencukupi untuk bahan ID ${bahan.bahanId}` }, { status: 400 });
+        }
+        totalHPP += costForThisBahan;
+      }
+    }
+
+    // Apply the updated batches
+    db.inventaris_batch = tempBatches;
+
+    // Insert Pesanan record
+    db.pesanan.push({
+      id: orderId,
+      tanggal,
+      waktu,
+      tipe: data.tipe || 'Dine-in',
+      meja: data.meja || '-',
+      totalHarga,
+      totalHPP,
+      status: 'selesai',
+      items: data.cartItems
     });
 
-    processOrder();
+    saveDb(db);
 
     return NextResponse.json({ success: true, message: 'Pesanan processed' });
   } catch (error) {
