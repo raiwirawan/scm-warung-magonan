@@ -1,8 +1,11 @@
 "use client";
 
 import styles from "./page.module.css";
+import { useScm } from "@/context/ScmContext";
 
 export default function PengaturanPage() {
+  const { resetData } = useScm();
+  
   return (
     <div className={styles.page}>
       <div className={styles.settingsGrid}>
@@ -92,14 +95,14 @@ export default function PengaturanPage() {
             <div className={styles.settingItem}>
                 <div className={styles.settingText}>
                     <strong>Reset Data Demo</strong>
-                    <p>Hapus semua transaksi, kembali ke mock data awal.</p>
+                    <p>Hapus semua transaksi, kembali ke mock data awal (Database SQLite).</p>
                 </div>
                 <button className={styles.btnDanger} onClick={() => {
-                    if (confirm("Reset data?")) {
-                        localStorage.removeItem('scmData_v1');
-                        window.location.reload();
+                    if (confirm("Reset seluruh data di database?")) {
+                        resetData();
+                        alert("Database telah direset.");
                     }
-                }}>Reset Data</button>
+                }}>Reset Database</button>
             </div>
         </div>
 
